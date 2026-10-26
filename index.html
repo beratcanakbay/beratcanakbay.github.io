@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="tr" data-lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Berat Can Akbay — gömülü yazılım, yazılım geliştirme ve yazılım testi. Projeler, yetenekler ve sertifikalar.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-family:system-ui,sans-serif;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Berat Can Akbay</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: teknik veri sayfası — sol etiket kolonu + içerik; arka planda soluk devre kartı yolları ve üzerlerinde akan sinyaller; tek turuncu sinyal rengi */
+:root{
+  --bg:#edf0f3; --surface:#ffffff; --ink:#14202e; --muted:#5a6878; --line:#cfd6de;
+  --accent:#d9561f; --accent-soft:#fbe6dc; --trace:rgba(20,40,64,.085); --pad:rgba(20,40,64,.16);
+  --display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d141d; --surface:#151f2b; --ink:#e4eaf1; --muted:#93a1b2; --line:#283444;
+  --accent:#f07a45; --accent-soft:#3a2219; --trace:rgba(150,180,210,.07); --pad:rgba(150,180,210,.15); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d141d; --surface:#151f2b; --ink:#e4eaf1; --muted:#93a1b2; --line:#283444;
+  --accent:#f07a45; --accent-soft:#3a2219; --trace:rgba(150,180,210,.07); --pad:rgba(150,180,210,.15); color-scheme:dark}
+
+*{box-sizing:border-box}
+html[data-lang="tr"] [lang="en"], html[data-lang="en"] [lang="tr"]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+#pcb{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding-block:28px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;font-family:var(--mono);font-size:13px;margin-bottom:24px;
+  border-bottom:1px solid var(--line);padding-bottom:14px}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover,nav a[aria-current="page"]{color:var(--accent)}
+nav .id{color:var(--ink);font-weight:500;margin-right:auto}
+.toggles{display:flex;gap:6px}
+.tg{font-family:var(--mono);font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:4px 9px;cursor:pointer;min-width:34px}
+.tg:hover{border-color:var(--ink)}
+.seg{display:flex}
+.seg .tg[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.seg .tg+.tg{border-left:0}
+
+.hero{padding-block:72px 64px}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(44px,9vw,96px);line-height:.95;margin:0;letter-spacing:-.015em;text-wrap:balance}
+.rule{display:flex;align-items:center;margin-top:22px;width:min(320px,70%)}
+.rule::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);flex:none}
+.rule::after{content:"";height:2px;background:var(--accent);flex:1;transform-origin:left}
+
+section{scroll-margin-top:72px;display:grid;grid-template-columns:200px 1fr;gap:24px 40px;padding-block:40px;border-top:1px solid var(--line)}
+section>*{min-width:0}
+.label{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.label h2{font-family:var(--display);font-size:26px;color:var(--ink);margin:4px 0 0;font-weight:600;text-wrap:balance}
+p{margin:0 0 14px;max-width:64ch}
+.lead{font-size:19px;line-height:1.55}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.fact{background:var(--surface);padding:16px 18px}
+.fact dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.fact dd{margin:0;font-weight:500;line-height:1.4}
+.fact small{display:block;color:var(--muted);font-weight:400;font-size:14px;margin-top:2px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{font-family:var(--mono);font-size:13px;border:1px solid var(--line);padding:3px 10px;background:var(--surface)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px}
+.skill{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.skill .n{font-weight:500}
+.skill .y{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meter{grid-column:1/-1;display:flex;gap:4px;align-items:center}
+.meter i{height:6px;flex:1;max-width:44px;background:var(--line)}
+.meter i.on{background:var(--accent)}
+.meter span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:8px}
+
+.hm{display:grid;grid-template-columns:40px repeat(12,minmax(0,1fr));gap:4px;margin-bottom:12px;max-width:620px}
+.hm .mh{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;letter-spacing:.04em}
+.hm .yl{font-family:var(--mono);font-size:12px;color:var(--muted);align-self:center}
+.hm .cell{aspect-ratio:1;max-width:100%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink);padding:0;min-width:0}
+.hm .cell.n1{background:var(--accent-soft);border-color:var(--accent-soft)}
+.hm .cell.n2{background:color-mix(in srgb,var(--accent) 55%,var(--accent-soft));border-color:transparent;color:var(--bg)}
+.hm .cell.n3{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.hm button.cell{cursor:pointer}
+.hm button.cell:hover{outline:2px solid var(--ink);outline-offset:1px}
+.hm .cell.sel{outline:2px solid var(--ink);outline-offset:1px}
+.hm .cell.off{opacity:.35}
+.tlnote{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 22px}
+.tlnote .key{display:inline-flex;gap:3px;align-items:center}
+.tlnote .key i{width:11px;height:11px;border:1px solid var(--line);background:var(--surface)}
+.tlnote .key i.n1{background:var(--accent-soft);border-color:var(--accent-soft)}
+.tlnote .key i.n2{background:color-mix(in srgb,var(--accent) 55%,var(--accent-soft));border-color:transparent}
+.tlnote .key i.n3{background:var(--accent);border-color:var(--accent)}
+.clear{font-family:var(--mono);font-size:12px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:3px 10px;cursor:pointer}
+@media (max-width:480px){.hm{grid-template-columns:30px repeat(12,minmax(0,1fr));gap:3px}.hm .cell{font-size:10px}.hm .mh{font-size:9px}}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{font-family:var(--mono);font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button .c{color:var(--muted);margin-left:6px}
+.filters button[aria-pressed="true"] .c{color:inherit;opacity:.7}
+.certs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.certs li{display:grid;grid-template-columns:112px 1fr auto;gap:4px 20px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.certs .d{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.certs .t{font-weight:500}
+.certs .o{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+.certs li.hl .t::before{content:"";display:inline-block;width:8px;height:8px;background:var(--accent);margin-right:10px;vertical-align:1px}
+
+.contact{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.mail{font-family:var(--mono);font-size:clamp(15px,3.4vw,20px);user-select:all;word-break:break-all}
+.btn{font-family:var(--mono);font-size:13px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn.ghost{background:var(--surface);color:var(--ink)}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:40px}
+
+/* projects view */
+.phead{padding-block:56px 40px}
+.back{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent)}
+.phead h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,72px);line-height:1;margin:18px 0 14px}
+.phead p{color:var(--muted);font-size:18px}
+.plist{display:grid;gap:24px}
+.project{background:var(--surface);border:1px solid var(--line);padding:28px}
+.project .hd{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline;margin-bottom:14px}
+.project h3{font-family:var(--display);font-size:26px;margin:0;font-weight:600}
+.status{font-family:var(--mono);font-size:12px;background:var(--accent-soft);color:var(--accent);padding:3px 10px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px 24px;margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+.spec dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.spec dd{margin:2px 0 0;font-size:15px}
+.tunnel{margin-top:22px;border:1px dashed var(--line);overflow-x:auto;background:var(--bg)}
+.tunnel svg{display:block;width:100%;min-width:480px;height:auto}
+.gh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border:1px dashed var(--line);padding:22px 28px;background:var(--surface)}
+.gh p{margin:0}
+.gh code{font-family:var(--mono);color:var(--accent);word-break:break-all}
+
+.facts{grid-template-columns:1fr!important}
+.exp-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
+.exp-date{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:400;white-space:nowrap}
+.exp-list{margin:12px 0 0;padding-left:18px;font-weight:400;color:var(--ink);display:grid;gap:4px;max-width:64ch}
+.exp-list li::marker{color:var(--accent)}
+.exp-chips{padding:0;margin-top:14px}
+/* project groups + software cards */
+.group{font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:16px}
+.group:first-child{margin-top:0}
+.group h2{font-family:var(--display);font-size:26px;color:var(--ink);margin:4px 0 0;font-weight:600}
+.swgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
+.project.sw{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.project.sw>*:not(.mini){margin-left:24px;margin-right:24px}
+.project.sw h3{font-family:var(--display);font-size:22px;margin-top:20px;margin-bottom:10px}
+.mini{background:var(--bg);border-bottom:1px solid var(--line);padding:14px 16px}
+.mini svg{display:block;width:100%;height:auto;max-height:150px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px;padding-bottom:22px}
+.chips span{font-family:var(--mono);font-size:12px;border:1px solid var(--line);padding:2px 9px;background:var(--bg)}
+
+.project.sw.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.project.sw.wide .mini{border-bottom:0;border-right:1px solid var(--line);display:grid;align-items:center}
+.project.sw.wide>.wide-body{margin:0;padding:0 24px;display:flex;flex-direction:column;min-width:0}
+@media (max-width:760px){.project.sw.wide{display:flex;flex-direction:column}.project.sw.wide .mini{border-right:0;border-bottom:1px solid var(--line)}}
+/* nav links + mobile */
+.links{display:flex;flex-wrap:wrap;gap:8px 20px}
+.tg.menu{display:none;position:relative;width:40px}
+.bars,.bars::before,.bars::after{display:block;width:16px;height:1.5px;background:currentColor;margin:0 auto;position:relative}
+.bars::before,.bars::after{content:"";position:absolute;left:0}
+.bars::before{top:-5px}.bars::after{top:5px}
+nav.open .bars{background:transparent}
+nav.open .bars::before{top:0;transform:rotate(45deg)}
+nav.open .bars::after{top:0;transform:rotate(-45deg)}
+@media (max-width:720px){
+  body{font-size:15.5px}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+  .wrap{padding-block:0 48px}
+  nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px))) 8px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+  nav .id{font-size:13px}
+  .tg{min-height:40px;min-width:40px;font-size:13px}
+  .tg.menu{display:grid;place-items:center}
+  .links{display:none;order:3;flex-basis:100%;flex-direction:column;gap:0;padding-top:6px}
+  nav.open .links{display:flex}
+  .links a{padding:12px 2px;border-top:1px solid var(--line);font-size:15px;color:var(--ink)}
+  .hero{padding-block:40px 36px}
+  .hero h1{font-size:clamp(40px,12.5vw,64px)}
+  section{padding-block:32px}
+  .label h2,.group h2{font-size:22px}
+  .lead{font-size:17px}
+  .fact{padding:14px}
+  .skill{padding:12px 0}
+  .filters button{padding:8px 12px}
+  .certs li{padding:12px 0;gap:2px 12px}
+  .certs .t{font-size:15px}
+  .phead{padding-block:32px 28px}
+  .phead p{font-size:16px}
+  .project{padding:18px}
+  .project h3{font-size:22px}
+  .project.sw>*:not(.mini){margin-left:18px;margin-right:18px}
+  .project.sw.wide>.wide-body{padding:0 18px}
+  .tunnel svg{min-width:0}
+  .spec{grid-template-columns:1fr 1fr}
+  .steps{gap:6px}
+  .step{padding:10px 8px;font-size:12px;min-height:44px}
+  .step b{display:block;margin:0 0 2px}
+  .gh{padding:18px}
+  .gh .btn{width:100%;text-align:center}
+  .contact .btn{min-height:44px;display:inline-flex;align-items:center}
+  .mail{font-size:16px}
+}
+/* sensor lab */
+.bench{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;margin-top:22px}
+.board-wrap svg{display:block;width:100%;height:auto}
+.serial{background:var(--ink);color:var(--bg);display:flex;flex-direction:column;min-height:220px;min-width:0}
+.serial-bar{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:11px;padding:8px 12px;border-bottom:1px solid color-mix(in srgb,var(--bg) 20%,transparent);opacity:.75}
+.serial pre{margin:0;padding:12px;font-family:var(--mono);font-size:12px;line-height:1.7;white-space:pre-wrap;word-break:break-word;flex:1}
+.serial .ok{color:#3fbf78}
+.serial .hi{color:var(--accent)}
+.serial .cur{display:inline-block;width:7px;height:13px;background:var(--bg);vertical-align:-2px;margin-left:2px}
+@media (prefers-reduced-motion:no-preference){.serial .cur{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+  .wire.live{stroke-dasharray:6 10;animation:flowing 1.1s linear infinite}@keyframes flowing{to{stroke-dashoffset:-16}}}
+.wire{stroke:var(--line)}
+.wire.live{stroke:var(--accent)}
+.sensor rect{fill:var(--surface);stroke:var(--muted);stroke-width:1.2}
+.sensor.live rect{stroke:var(--accent)}
+.sensor circle{fill:var(--muted)}
+.sensor.live circle{fill:var(--accent)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.step{font-family:var(--mono);font-size:13px;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px 12px;cursor:pointer;position:relative}
+.step b{color:var(--muted);font-weight:500;margin-right:6px}
+.step[aria-selected="true"]{border-color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent)}
+.step[aria-selected="true"] b{color:var(--accent)}
+.step-text{margin:12px 0 0;min-height:3.2em}
+@media (max-width:720px){.bench{grid-template-columns:1fr}.serial{min-height:200px}}
+
+@media (max-width:720px){
+  section{grid-template-columns:1fr;gap:20px}
+  .hero{padding-block:48px 44px}
+  .certs li{grid-template-columns:1fr auto}
+  .certs .d{grid-column:1/-1}
+  .project{padding:20px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .rule::after{animation:draw 1s .15s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes draw{from{transform:scaleX(.1)}to{transform:scaleX(1)}}
+  .btn,.tg,nav a,.tl .tip{transition:background .15s,color .15s,opacity .15s}
+}
+</style>
+
+</head>
+<body>
+<canvas id="pcb" aria-hidden="true"></canvas>
+<div class="wrap">
+  <nav aria-label="Menü">
+    <a class="id" href="#hakkimda">berat.can.akbay</a>
+    <div class="links" id="nav-links">
+    <a href="#hakkimda"><span lang="tr">Hakkımda</span><span lang="en">About</span></a>
+    <a href="#yetenekler"><span lang="tr">Yetenekler</span><span lang="en">Skills</span></a>
+    <a href="#egitimler"><span lang="tr">Sertifikalar</span><span lang="en">Training</span></a>
+    <a href="#projeler" id="nav-projects"><span lang="tr">Projeler</span><span lang="en">Projects</span></a>
+    <a href="#iletisim"><span lang="tr">İletişim</span><span lang="en">Contact</span></a>
+    </div>
+    <div class="toggles">
+      <div class="seg" role="group" aria-label="Dil / Language">
+        <button class="tg" id="lang-tr" type="button" data-l="tr" aria-pressed="true">TR</button>
+        <button class="tg" id="lang-en" type="button" data-l="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="tg" id="theme" type="button" aria-label="Tema / Theme">◐</button>
+      <button class="tg menu" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü"><span class="bars" aria-hidden="true"></span></button>
+    </div>
+  </nav>
+
+  <!-- ===== HOME ===== -->
+  <main id="view-home">
+    <header class="hero">
+      <h1>Berat Can Akbay</h1>
+      <div class="rule" aria-hidden="true"></div>
+    </header>
+
+    <section id="hakkimda">
+      <div class="label"><span lang="tr">// hakkımda</span><span lang="en">// about</span><h2><span lang="tr">Hakkımda</span><span lang="en">About me</span></h2></div>
+      <div>
+        <p class="lead" lang="tr">Türkiye'nin en hızlı büyüyen sektörlerinden biri olan savunma sanayiine ilgi duyuyorum. Mezun olduğumdan beri kendimi bu alanda geliştirmek için eğitimler alıyor ve projeler üretiyorum.</p>
+        <p class="lead" lang="en">I'm drawn to the defense industry, one of the fastest-growing sectors in Türkiye. Since graduating, I've been building toward it through focused training and hands-on projects.</p>
+        <p lang="tr">Odak noktam gömülü sistemler: STM32 mikrodenetleyicileri programlamak, C ile çalışmak ve IoT cihazlarının güvenlik tarafını anlamak. Bunun yanında nesne tabanlı programlama ve web geliştirme ile de ilgileniyorum. Şu anda Ostim Teknik Üniversitesi'nde bir rüzgâr tüneli geliştiren Ar-Ge ekibinde yer alıyorum.</p>
+        <p lang="en">My focus is embedded systems: programming STM32 microcontrollers, writing C, and understanding how IoT devices are secured. I also work with object-oriented languages and build for the web. I'm currently on the R&amp;D team building a wind tunnel at OSTİM Technical University.</p>
+        <dl class="facts">
+          <div class="fact"><dt><span lang="tr">Eğitim</span><span lang="en">Education</span></dt><dd><span lang="tr">Bilgisayar Programcılığı (Önlisans)</span><span lang="en">Associate Degree, Computer Programming</span><small><span lang="tr">Sakarya Uygulamalı Bilimler Üniversitesi, Karasu MYO · 2023 – 2026</span><span lang="en">Sakarya University of Applied Sciences · 2023 – 2026</span></small></dd></div>
+          <div class="fact exp"><dt><span lang="tr">Deneyim</span><span lang="en">Experience</span></dt>
+            <dd>
+              <div class="exp-head">
+                <div><span lang="tr">Yazılım Test Stajyeri</span><span lang="en">Software Test Intern</span><small><span lang="tr">HIS Turkey · Yazılım Departmanı</span><span lang="en">HIS Turkey · Software Department</span></small></div>
+                <span class="exp-date"><span lang="tr">Haz 2025 – Oca 2026</span><span lang="en">Jun 2025 – Jan 2026</span></span>
+              </div>
+              <ul class="exp-list" lang="tr">
+                <li>Yazılım departmanında geliştirilen uygulamaların test süreçlerinde görev aldım.</li>
+                <li>Python ve Selenium ile web arayüzleri için otomatik testler yazdım ve çalıştırdım.</li>
+                <li>Uygulamaların veritabanı tarafını SQL sorgularıyla kontrol ederek kayıtların doğruluğunu test ettim.</li>
+                <li>Bulduğum hataları raporlayarak geliştirme ekibiyle birlikte giderilmesine katkı sağladım.</li>
+              </ul>
+              <ul class="exp-list" lang="en">
+                <li>Worked on testing the applications built by the software department.</li>
+                <li>Wrote and ran automated UI tests in Python with Selenium.</li>
+                <li>Verified the data layer with SQL queries to make sure records were saved correctly.</li>
+                <li>Reported the bugs I found and worked with developers to get them fixed.</li>
+              </ul>
+              <div class="chips exp-chips"><span>Python</span><span>Selenium</span><span>SQL</span></div>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="yetenekler">
+      <div class="label"><span lang="tr">// yetenekler</span><span lang="en">// skills</span><h2><span lang="tr">Yetenekler</span><span lang="en">Skills</span></h2></div>
+      <div class="skills" id="skills"></div>
+    </section>
+
+    <section id="egitimler">
+      <div class="label"><span lang="tr">// eğitimler</span><span lang="en">// training</span><h2><span lang="tr">Sertifikalar ve Seminerler</span><span lang="en">Certifications and Training</span></h2></div>
+      <div>
+        <div class="hm" id="hm" role="group" aria-label="Aylara göre eğitimler"></div>
+        <div class="tlnote" id="tlnote"></div>
+        <div class="filters" id="filters" role="group" aria-label="Kurum"></div>
+        <ul class="certs" id="certs"></ul>
+      </div>
+    </section>
+
+    <section id="iletisim">
+      <div class="label"><span lang="tr">// iletişim</span><span lang="en">// contact</span><h2><span lang="tr">İletişim</span><span lang="en">Get in touch</span></h2></div>
+      <div>
+        <p lang="tr">İş fırsatları ve projeler için bana e-posta veya LinkedIn üzerinden ulaşabilirsiniz.</p>
+        <p lang="en">Have a role or a project in mind? Send me an email or reach out on LinkedIn.</p>
+        <div class="contact">
+          <span class="mail" id="mail">beratakbay71@gmail.com</span>
+          <button class="btn" id="copy" type="button"><span lang="tr">Kopyala</span><span lang="en">Copy</span></button>
+        </div>
+        <div class="contact" style="margin-top:16px">
+          <a class="btn ghost" href="https://www.linkedin.com/in/berat-can-akbay-2bb3bb2a9/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn ghost" href="https://github.com/beratcanakbay" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <footer>© 2026 Berat Can Akbay · Ankara</footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PROJECTS ===== -->
+  <main id="view-projects" hidden>
+    <header class="phead">
+      <a class="back" href="#hakkimda">← <span lang="tr">Ana sayfa</span><span lang="en">Home</span></a>
+      <h1><span lang="tr">Projeler</span><span lang="en">Projects</span></h1>
+      <p lang="tr">Üzerinde çalıştığım ve geliştirdiğim projeler.</p>
+      <p lang="en">Things I've built and worked on.</p>
+    </header>
+
+    <div class="plist">
+      <div class="group"><span lang="tr">// donanım</span><span lang="en">// hardware</span><h2><span lang="tr">Donanım ve Gömülü Sistemler</span><span lang="en">Hardware and Embedded Systems</span></h2></div>
+      <article class="project">
+        <div class="hd">
+          <h3><span lang="tr">Hava-Rüzgâr Tüneli</span><span lang="en">Wind Tunnel</span></h3>
+          <span class="status"><span lang="tr">Devam ediyor · Mayıs 2026'dan beri</span><span lang="en">In progress · since May 2026</span></span>
+        </div>
+        <p lang="tr">Ölçekli uçak kanatlarının ve model roketlerin aerodinamik davranışını ve sürtünmesini ölçmek için geliştirdiğimiz bir rüzgâr tüneli. Projede Ar-Ge ve destek tarafında çalıştım; malzeme tedariğini üstlendim ve ekiple birlikte yapımın her aşamasında yer aldım.</p>
+        <p lang="en">A wind tunnel for measuring the aerodynamic behavior and drag of scaled aircraft wings and model rockets. I work on the R&amp;D and support side, handling materials and pitching in at every stage of the build alongside the rest of the team.</p>
+        <div class="tunnel" aria-hidden="true">
+          <svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="10">
+            <g fill="none" stroke="var(--muted)" stroke-width="1.5">
+              <path d="M20 20 L150 50 L470 50 L620 25"/>
+              <path d="M20 130 L150 100 L470 100 L620 125"/>
+            </g>
+            <g fill="none" stroke="var(--accent)" stroke-width="1" opacity=".75">
+              <path d="M30 60 C120 66 180 66 250 66 C285 66 300 58 320 58 C345 58 360 66 400 66 L610 66"/>
+              <path d="M30 75 C120 75 200 75 260 75 C285 75 300 68 320 68 C345 68 360 76 400 76 L610 76"/>
+              <path d="M30 90 C120 84 180 84 250 84 C285 84 300 84 320 84 C345 84 360 84 400 84 L610 84"/>
+            </g>
+            <path d="M285 76 C300 66 345 64 365 74 C345 78 305 80 285 76 Z" fill="var(--ink)"/>
+            <g fill="var(--muted)">
+              <text x="22" y="145" id="lbl-in">GİRİŞ</text>
+              <text x="320" y="44" text-anchor="middle" id="lbl-test">TEST BÖLÜMÜ</text>
+              <text x="618" y="145" text-anchor="end" id="lbl-dif">DİFÜZÖR</text>
+            </g>
+          </svg>
+        </div>
+        <dl class="spec">
+          <div><dt><span lang="tr">Kurum</span><span lang="en">Institution</span></dt><dd><span lang="tr">Ostim Teknik Üniversitesi</span><span lang="en">OSTİM Technical University</span></dd></div>
+          <div><dt><span lang="tr">Görev</span><span lang="en">Role</span></dt><dd><span lang="tr">Ar-Ge ve Destek</span><span lang="en">R&amp;D and support</span></dd></div>
+          <div><dt><span lang="tr">Ölçüm</span><span lang="en">Measures</span></dt><dd><span lang="tr">Aerodinamik, sürtünme kuvveti</span><span lang="en">Aerodynamics, drag</span></dd></div>
+          <div><dt><span lang="tr">Test modelleri</span><span lang="en">Test models</span></dt><dd><span lang="tr">Ölçekli kanat, model roket</span><span lang="en">Scaled wings, model rockets</span></dd></div>
+        </dl>
+      </article>
+
+      <article class="project">
+        <div class="hd">
+          <h3><span lang="tr">Otto Robot</span><span lang="en">Otto Robot</span></h3>
+          <span class="status"><span lang="tr">Tamamlandı · 2026</span><span lang="en">Completed · 2026</span></span>
+        </div>
+        <p lang="tr">Yürüyebilen ve hareket edebilen iki bacaklı bir Otto robot. Projenin her aşamasını kendim yaptım: önce teknik resmini çizdim, ardından dış gövdeyi 3D yazıcıdan bastım, son olarak robotun hareketlerini kodladım.</p>
+        <p lang="en">A two-legged Otto robot that walks and moves on its own. I handled every part of it myself: I drew the technical drawings, 3D-printed the body, and wrote the code that drives its movement.</p>
+        <div class="tunnel" aria-hidden="true">
+          <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="10">
+            <g fill="none" stroke="var(--ink)" stroke-width="1.5">
+              <rect x="270" y="24" width="100" height="70" rx="6"/>
+              <rect x="282" y="94" width="76" height="28"/>
+              <rect x="290" y="122" width="18" height="34"/>
+              <rect x="332" y="122" width="18" height="34"/>
+              <path d="M280 156 h40 v12 h-40 z M320 156 h40 v12 h-40 z"/>
+            </g>
+            <g fill="none" stroke="var(--accent)" stroke-width="1.5">
+              <circle cx="300" cy="56" r="12"/><circle cx="340" cy="56" r="12"/>
+            </g>
+            <g stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3" fill="none">
+              <path d="M320 14 V180"/>
+            </g>
+            <g stroke="var(--muted)" stroke-width="1" fill="none">
+              <path d="M230 24 V168 M226 24 h8 M226 168 h8"/>
+              <path d="M270 10 H370 M270 6 v8 M370 6 v8"/>
+              <path d="M370 56 L430 40 H470"/>
+              <path d="M358 108 L430 108 H470"/>
+              <path d="M350 140 L430 150 H470"/>
+            </g>
+            <g fill="var(--muted)">
+              <text x="474" y="43" id="o1">MESAFE SENSÖRÜ</text>
+              <text x="474" y="111" id="o2">GÖVDE · 3D BASKI</text>
+              <text x="474" y="153" id="o3">SERVO BACAKLAR</text>
+              <text x="150" y="100" id="o4">TEKNİK RESİM</text>
+            </g>
+          </svg>
+        </div>
+        <dl class="spec">
+          <div><dt><span lang="tr">Tasarım</span><span lang="en">Design</span></dt><dd><span lang="tr">Teknik resim, kendi çizimim</span><span lang="en">Technical drawings, my own</span></dd></div>
+          <div><dt><span lang="tr">Üretim</span><span lang="en">Fabrication</span></dt><dd><span lang="tr">3D yazıcı ile gövde baskısı</span><span lang="en">3D-printed body</span></dd></div>
+          <div><dt><span lang="tr">Yazılım</span><span lang="en">Software</span></dt><dd><span lang="tr">Hareket kodlarının tamamı</span><span lang="en">All motion code</span></dd></div>
+          <div><dt><span lang="tr">Rolüm</span><span lang="en">My role</span></dt><dd><span lang="tr">Tek başıma, baştan sona</span><span lang="en">Solo, end to end</span></dd></div>
+        </dl>
+      </article>
+
+      <article class="project">
+        <div class="hd">
+          <h3><span lang="tr">FPV Drone</span><span lang="en">FPV Drone</span></h3>
+          <span class="status"><span lang="tr">Tamamlandı · 2026</span><span lang="en">Completed · 2026</span></span>
+        </div>
+        <p lang="tr">Kamera görüntüsü üzerinden birinci şahıs bakış açısıyla uçurulan bir FPV drone. Drone'u sıfırdan kendim ürettim: parçaların montajından kodlamaya kadar tüm aşamaları tek başıma yaptım.</p>
+        <p lang="en">A first-person-view drone, flown through a live feed from its onboard camera. I built it from scratch on my own, from assembling the hardware to writing the code.</p>
+        <div class="tunnel" aria-hidden="true">
+          <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="10">
+            <g stroke="var(--ink)" stroke-width="5" stroke-linecap="round"><path d="M262 37 L378 153 M378 37 L262 153"/></g>
+            <g fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3">
+              <circle cx="262" cy="37" r="30"/><circle cx="378" cy="37" r="30"/><circle cx="262" cy="153" r="30"/><circle cx="378" cy="153" r="30"/>
+            </g>
+            <g fill="var(--ink)"><circle cx="262" cy="37" r="6"/><circle cx="378" cy="37" r="6"/><circle cx="262" cy="153" r="6"/><circle cx="378" cy="153" r="6"/></g>
+            <rect x="298" y="73" width="44" height="44" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>
+            <path d="M320 70 L310 58 H330 Z" fill="var(--accent)"/>
+            <g fill="none" stroke="var(--accent)" stroke-width="1" opacity=".8"><path d="M320 56 L290 8 M320 56 L350 8"/></g>
+            <g stroke="var(--muted)" stroke-width="1" fill="none">
+              <path d="M342 95 L430 95 H470"/>
+              <path d="M405 37 L430 60 H470"/>
+              <path d="M330 64 L430 24 H470"/>
+              <path d="M235 153 L190 130 H150"/>
+            </g>
+            <g fill="var(--muted)">
+              <text x="474" y="27" id="d1">FPV KAMERA</text>
+              <text x="474" y="63" id="d2">MOTOR · PERVANE</text>
+              <text x="474" y="98" id="d3">UÇUŞ KONTROLCÜSÜ</text>
+              <text x="150" y="124" id="d4">X ŞASİ</text>
+            </g>
+          </svg>
+        </div>
+        <dl class="spec">
+          <div><dt><span lang="tr">Tür</span><span lang="en">Type</span></dt><dd><span lang="tr">FPV quadcopter</span><span lang="en">FPV quadcopter</span></dd></div>
+          <div><dt><span lang="tr">Donanım</span><span lang="en">Hardware</span></dt><dd><span lang="tr">Montaj ve kurulum</span><span lang="en">Assembly and setup</span></dd></div>
+          <div><dt><span lang="tr">Yazılım</span><span lang="en">Software</span></dt><dd><span lang="tr">Kodlamanın tamamı</span><span lang="en">All of the code</span></dd></div>
+          <div><dt><span lang="tr">Rolüm</span><span lang="en">My role</span></dt><dd><span lang="tr">Tek başıma, sıfırdan</span><span lang="en">Solo, from scratch</span></dd></div>
+        </dl>
+      </article>
+
+      <article class="project lab" id="lab">
+        <div class="hd">
+          <h3><span lang="tr">Mikrodenetleyici ve Sensör Laboratuvarı</span><span lang="en">Microcontroller and Sensor Lab</span></h3>
+          <span class="status"><span lang="tr">Kişisel çalışmalar</span><span lang="en">Personal projects</span></span>
+        </div>
+        <p lang="tr">Gömülü sistemlere Arduino ile başladım, ardından STM32 ve ESP32 ile devam ettim. Bu süreçte çok sayıda sensörü tek tek test ettim, sonra birkaç sensörü bir araya getirerek küçük projeler geliştirdim.</p>
+        <p lang="en">I got into embedded systems with Arduino, then moved on to STM32 and ESP32. Along the way I tested a wide range of sensors one by one, then combined them into small projects of my own.</p>
+
+        <div class="bench">
+          <div class="board-wrap">
+            <svg id="bb" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="9" aria-hidden="true">
+              <defs>
+                <pattern id="holes" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.1" fill="var(--line)"/></pattern>
+              </defs>
+              <rect x="6" y="6" width="408" height="248" rx="8" fill="var(--bg)" stroke="var(--line)"/>
+              <rect x="16" y="16" width="388" height="228" fill="url(#holes)"/>
+              <path d="M20 128 H400" stroke="var(--line)" stroke-width="6"/>
+              <g id="wires" fill="none" stroke-width="1.6" stroke-linecap="round"></g>
+              <g id="sensors"></g>
+              <g id="mcu">
+                <rect id="mcu-body" x="160" y="98" width="100" height="60" rx="4" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.6"/>
+                <rect x="190" y="113" width="40" height="30" fill="var(--ink)"/>
+                <g stroke="var(--muted)" stroke-width="2" id="mcu-pins"></g>
+                <text id="mcu-name" x="210" y="174" text-anchor="middle" fill="var(--ink)" font-size="11" font-weight="500">ARDUINO</text>
+              </g>
+            </svg>
+          </div>
+          <div class="serial" aria-live="off">
+            <div class="serial-bar"><span><span lang="tr">Seri Monitör</span><span lang="en">Serial Monitor</span></span><span>9600 baud</span></div>
+            <pre id="serial-out"></pre>
+          </div>
+        </div>
+
+        <div class="steps" role="tablist" aria-label="Kartlar">
+          <button type="button" role="tab" class="step" id="step-0" data-i="0" aria-selected="true"><b>01</b> Arduino</button>
+          <button type="button" role="tab" class="step" id="step-1" data-i="1" aria-selected="false"><b>02</b> STM32</button>
+          <button type="button" role="tab" class="step" id="step-2" data-i="2" aria-selected="false"><b>03</b> ESP32</button>
+        </div>
+        <p class="step-text" id="step-text"></p>
+      </article>
+
+      <div class="group"><span lang="tr">// yazılım</span><span lang="en">// software</span><h2><span lang="tr">Yazılım Projeleri</span><span lang="en">Software Projects</span></h2></div>
+      <div class="swgrid">
+        <article class="project sw">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="10">
+              <rect x="20" y="14" width="260" height="92" fill="none" stroke="var(--muted)" stroke-width="1.2"/>
+              <g stroke="var(--muted)" stroke-width="1"><path d="M60 14v30M100 14v30M140 14v30M180 14v30M220 14v30M60 106V76M100 106V76M140 106V76M180 106V76M220 106V76"/></g>
+              <path d="M20 60 H280" stroke="var(--line)" stroke-dasharray="6 6"/>
+              <g fill="var(--ink)"><rect x="28" y="20" width="24" height="18" rx="3"/><rect x="108" y="20" width="24" height="18" rx="3"/><rect x="148" y="20" width="24" height="18" rx="3"/><rect x="68" y="82" width="24" height="18" rx="3"/><rect x="228" y="82" width="24" height="18" rx="3"/></g>
+              <rect x="188" y="20" width="24" height="18" rx="3" fill="var(--accent)"/>
+              <path d="M262 52 L262 68 M240 60 H262" stroke="var(--accent)" stroke-width="2"/>
+              <text x="236" y="34" fill="var(--muted)" font-size="14" font-weight="600">P</text>
+              <text x="28" y="57" fill="var(--muted)" id="sw1">DOLU 6 · BOŞ 6</text>
+            </svg>
+          </div>
+          <h3><span lang="tr">Otopark Otomasyonu</span><span lang="en">Parking Management System</span></h3>
+          <p lang="tr">Bir otoparkın araç giriş-çıkışlarını ve doluluk durumunu yöneten bir otomasyon sistemi. Uygulamayı PHP ile geliştirdim, verileri SQL ile tasarladığım bir veritabanında tuttum.</p>
+          <p lang="en">A management system that tracks vehicles coming in and out of a parking lot and how full it is. I built it in PHP, with the data stored in a SQL database I designed.</p>
+          <div class="chips"><span>PHP</span><span>SQL</span></div>
+        </article>
+
+        <article class="project sw">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="10">
+              <rect x="40" y="8" width="62" height="104" rx="10" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>
+              <rect x="60" y="13" width="22" height="4" rx="2" fill="var(--ink)"/>
+              <g fill="var(--line)"><rect x="48" y="26" width="46" height="22" rx="3"/><rect x="48" y="54" width="46" height="22" rx="3"/><rect x="48" y="82" width="46" height="14" rx="3"/></g>
+              <rect x="48" y="26" width="46" height="22" rx="3" fill="var(--accent)" opacity=".85"/>
+              <g fill="none" stroke="var(--accent)" stroke-width="1.4"><path d="M116 52 H196"/><path d="M190 46 L198 52 L190 58"/><path d="M196 70 H116"/><path d="M122 64 L114 70 L122 76"/></g>
+              <g fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"><path d="M214 36 v48 c0 8 56 8 56 0 v-48"/><ellipse cx="242" cy="36" rx="28" ry="8"/></g>
+              <path d="M214 52 c0 8 56 8 56 0 M214 68 c0 8 56 8 56 0" fill="none" stroke="var(--ink)" stroke-width="1"/>
+              <text x="132" y="44" fill="var(--muted)" id="sw2">SENKRON</text>
+            </svg>
+          </div>
+          <h3><span lang="tr">Mobil Web Uygulaması</span><span lang="en">Mobile Web App</span></h3>
+          <p lang="tr">Telefonun ana ekranına eklenip uygulama gibi çalışan bir web uygulaması (PWA) geliştirdim. Kullanıcı hesapları, cihazlar arasında paylaşılan veriler ve fotoğraf yükleme gibi özellikleri var. Arayüzü HTML, CSS ve JavaScript ile yazdım, veri tarafında Supabase üzerinde PostgreSQL kullandım.</p>
+          <p lang="en">A web app that installs to a phone's home screen and runs like a native app (PWA). It has user accounts, data shared across devices, and photo uploads. I wrote the front end in HTML, CSS and JavaScript, with PostgreSQL on Supabase behind it.</p>
+          <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PWA</span><span>Supabase</span><span>PostgreSQL</span></div>
+        </article>
+
+        <article class="project sw">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="11">
+              <rect x="20" y="8" width="260" height="104" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>
+              <path d="M20 26 H280" stroke="var(--line)"/>
+              <g fill="var(--line)"><circle cx="34" cy="17" r="3.5"/><circle cx="46" cy="17" r="3.5"/><circle cx="58" cy="17" r="3.5"/></g>
+              <text x="36" y="46" fill="var(--accent)">class</text><text x="76" y="46" fill="var(--ink)">Uygulama</text><text x="146" y="46" fill="var(--muted)">{</text>
+              <text x="52" y="64" fill="var(--accent)">public</text><text x="100" y="64" fill="var(--ink)">void Calistir()</text>
+              <text x="52" y="82" fill="var(--muted)">// …</text>
+              <text x="36" y="100" fill="var(--muted)">}</text>
+              <text x="246" y="100" fill="var(--accent)" font-size="16" font-weight="600">C#</text>
+            </svg>
+          </div>
+          <h3><span lang="tr">C# Uygulamaları</span><span lang="en">C# Applications</span></h3>
+          <p lang="tr">C# kullanarak çeşitli uygulamalar geliştirdim. Nesne tabanlı programlama bilgimi bu projelerde uygulamaya döktüm.</p>
+          <p lang="en">I've built a range of applications in C#, putting object-oriented design into practice along the way.</p>
+          <div class="chips"><span>C#</span><span>.NET</span><span lang="tr">Nesne Tabanlı Programlama</span><span lang="en">OOP</span></div>
+        </article>
+
+        <article class="project sw">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="9">
+              <g fill="var(--surface)" stroke="var(--ink)" stroke-width="1.3">
+                <rect x="20" y="14" width="76" height="62"/><rect x="204" y="14" width="76" height="62"/><rect x="112" y="58" width="76" height="52"/>
+              </g>
+              <g fill="var(--ink)"><rect x="20" y="14" width="76" height="14"/><rect x="204" y="14" width="76" height="14"/><rect x="112" y="58" width="76" height="14"/></g>
+              <g stroke="var(--line)"><path d="M26 42 H90 M26 54 H90 M26 66 H76 M210 42 H274 M210 54 H274 M210 66 H260 M118 86 H182 M118 98 H168"/></g>
+              <g fill="none" stroke="var(--accent)" stroke-width="1.4"><path d="M96 42 H104 V84 H112"/><path d="M204 54 H196 V96 H188"/></g>
+              <g fill="var(--accent)"><circle cx="112" cy="84" r="2.6"/><circle cx="188" cy="96" r="2.6"/></g>
+              <g fill="var(--bg)" font-weight="500"><text x="26" y="24">TABLO_A</text><text x="210" y="24">TABLO_B</text><text x="118" y="68">İLİŞKİ</text></g>
+            </svg>
+          </div>
+          <h3><span lang="tr">Veritabanı Geliştirme</span><span lang="en">Database Development</span></h3>
+          <p lang="tr">Projelerimde veritabanı tasarımı ve geliştirmesi yaptım: tabloları ve aralarındaki ilişkileri kurdum, verileri SQL sorgularıyla yönettim.</p>
+          <p lang="en">Across my projects I've designed and built the databases behind them: modeling tables and the relationships between them, and working with the data through SQL.</p>
+          <div class="chips"><span>SQL</span><span>PostgreSQL</span><span lang="tr">Veritabanı tasarımı</span><span lang="en">Data modeling</span></div>
+        </article>
+        <article class="project sw wide">
+          <div class="mini" aria-hidden="true">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, monospace" font-size="10">
+              <rect x="20" y="10" width="260" height="130" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>
+              <path d="M20 30 H280" stroke="var(--line)"/>
+              <text x="32" y="24" fill="var(--muted)" id="sw3">TEST ÇALIŞTIRMASI</text>
+              <g fill="var(--ink)"><text x="54" y="52" id="t1">giriş ekranı</text><text x="54" y="74" id="t2">form doğrulama</text><text x="54" y="96" id="t3">veri kaydı</text><text x="54" y="118" id="t4">hata durumu</text></g>
+              <g fill="#2f9e5b" font-size="12"><text x="34" y="53">✓</text><text x="34" y="75">✓</text><text x="34" y="119">✓</text></g>
+              <text x="34" y="97" fill="var(--accent)" font-size="12">✕</text>
+              <rect x="176" y="86" width="92" height="16" rx="2" fill="var(--accent-soft)"/>
+              <text x="182" y="97" fill="var(--accent)" id="t5">HATA RAPORU</text>
+              <g fill="var(--muted)" text-anchor="end"><text x="268" y="52">ok</text><text x="268" y="74">ok</text><text x="268" y="118">ok</text></g>
+            </svg>
+          </div>
+          <div class="wide-body">
+            <h3><span lang="tr">Yazılım Testi</span><span lang="en">Software Testing</span></h3>
+            <p lang="tr">HIS Turkey'in yazılım departmanında yazılım test stajyeri olarak görev aldım. Python ve Selenium ile otomatik arayüz testleri yazdım, veritabanı tarafını SQL sorgularıyla doğruladım ve bulduğum hataların giderilmesine katkı sağladım. Savunma Kariyer'in Yazılım Testinin Temelleri eğitimiyle bu alandaki bilgimi pekiştirdim.</p>
+            <p lang="en">As a software test intern in HIS Turkey's software department, I wrote automated UI tests in Python with Selenium, verified the data layer with SQL, and helped get the bugs I found fixed before release. Savunma Kariyer's Fundamentals of Software Testing program gave that hands-on work a solid foundation.</p>
+            <div class="chips"><span>Python</span><span>Selenium</span><span>SQL</span><span lang="tr">Yazılım testi</span><span lang="en">Software testing</span><span lang="tr">Hata tespiti</span><span lang="en">Bug hunting</span><span lang="tr">Kalite güvencesi</span><span lang="en">Quality assurance</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="gh">
+        <p><span lang="tr">Kodlarım ve diğer çalışmalarım GitHub'da:</span><span lang="en">More of my code lives on GitHub:</span> <code>github.com/beratcanakbay</code></p>
+        <a class="btn" href="https://github.com/beratcanakbay" target="_blank" rel="noopener"><span lang="tr">GitHub'a git</span><span lang="en">View GitHub</span> ↗</a>
+      </div>
+    </div>
+    <footer>© 2026 Berat Can Akbay · Ankara</footer>
+  </main>
+</div>
+
+<script>
+const root=document.documentElement;
+const store={get(k){try{return localStorage.getItem(k)}catch(_){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(_){}}};
+
+/* ---------- language ---------- */
+let lang=store.get("lang")||"tr";
+const svgLabels={tr:["GİRİŞ","TEST BÖLÜMÜ","DİFÜZÖR"],en:["INLET","TEST SECTION","DIFFUSER"]};
+const svgMore={tr:{o1:"MESAFE SENSÖRÜ",o2:"GÖVDE · 3D BASKI",o3:"SERVO BACAKLAR",o4:"TEKNİK RESİM",d1:"FPV KAMERA",d2:"MOTOR · PERVANE",d3:"UÇUŞ KONTROLCÜSÜ",d4:"X ŞASİ",m1:"BAŞLANGIÇ",m2:"GÖMÜLÜ C",m3:"WI-FI · IoT",m4:"SENSÖR TESTLERİ VE KÜÇÜK PROJELER",sw1:"DOLU 6 · BOŞ 6",sw2:"SENKRON",sw3:"TEST ÇALIŞTIRMASI",t1:"giriş ekranı",t2:"form doğrulama",t3:"veri kaydı",t4:"hata durumu",t5:"HATA RAPORU"},
+  en:{o1:"DISTANCE SENSOR",o2:"BODY · 3D PRINTED",o3:"SERVO LEGS",o4:"TECH DRAWING",d1:"FPV CAMERA",d2:"MOTOR · PROP",d3:"FLIGHT CONTROLLER",d4:"X FRAME",m1:"STARTING OUT",m2:"EMBEDDED C",m3:"WI-FI · IoT",m4:"SENSOR TESTING AND SMALL BUILDS",sw1:"TAKEN 6 · FREE 6",sw2:"SYNC",sw3:"TEST RUN",t1:"login screen",t2:"form validation",t3:"saving data",t4:"error handling",t5:"BUG REPORT"}};
+function setLang(l){
+  lang=l;root.dataset.lang=l;root.lang=l;
+  document.querySelectorAll("[data-l]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  ["lbl-in","lbl-test","lbl-dif"].forEach((id,i)=>document.getElementById(id).textContent=svgLabels[l][i]);
+  for(const [id,txt] of Object.entries(svgMore[l])){const el=document.getElementById(id);if(el)el.textContent=txt;}
+  store.set("lang",l);render();
+}
+document.querySelectorAll("[data-l]").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.l)));
+
+/* ---------- theme ---------- */
+const savedTheme=store.get("theme"); if(savedTheme) root.dataset.theme=savedTheme;
+document.getElementById("theme").addEventListener("click",()=>{
+  const cur=root.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  root.dataset.theme=cur==="dark"?"light":"dark"; store.set("theme",root.dataset.theme); pcb.redraw();
+});
+
+/* ---------- views ---------- */
+const home=document.getElementById("view-home"), proj=document.getElementById("view-projects"), navP=document.getElementById("nav-projects");
+function route(){
+  const h=location.hash.slice(1), isP=h==="projeler";
+  home.hidden=isP; proj.hidden=!isP;
+  isP?navP.setAttribute("aria-current","page"):navP.removeAttribute("aria-current");
+  if(isP) scrollTo(0,0);
+  else if(h){const el=document.getElementById(h); if(el) el.scrollIntoView();}
+}
+addEventListener("hashchange",route);
+
+/* ---------- data ---------- */
+const skills=[
+  ["Algoritma ve Programlama","Algorithms and Programming",2,3],["Nesne Tabanlı Programlama","Object-Oriented Programming",2,3],
+  ["Ofis Uygulamaları","Microsoft Office",2,3],["C Programlama Dili","C",2,2],
+  ["Gömülü Yazılım","Embedded Software",2,2],["STM32 ile Gömülü Yazılım","STM32 Development",2,2],
+  ["Web Geliştirme","Web Development",2,2],["Git ve GitHub","Git and GitHub",2,1],["IoT ve Güvenliği","IoT Security",1,1],
+  ["Yazılım Testi (Python, Selenium, SQL)","Software Testing (Python, Selenium, SQL)",1,"2026"]
+];
+const lvlName={tr:["","Giriş","Orta","İleri"],en:["","Beginner","Intermediate","Advanced"]};
+const certs=[
+  ["2026-08-29","Yazılım Testinin Temelleri","Fundamentals of Software Testing","Savunma Kariyer"],
+  ["2026-08-28","Veri Analizi","Data Analysis","Savunma Kariyer"],
+  ["2026-08-27","Savunma Sanayii Stratejilerinde Yapay Zekâ ve Otonom Sistemler","AI and Autonomous Systems in Defense Strategy","Savunma Kariyer"],
+  ["2026-08-27","Blok Zincir","Blockchain Fundamentals","Savunma Kariyer"],
+  ["2026-08-26","Bilgi Güvenliği Farkındalığı","Information Security Awareness","Savunma Kariyer"],
+  ["2026-08-04","İHA-1 Ticari Pilotluğu","Commercial Drone Pilot (UAV-1)","Otüsem",true],
+  ["2026-08-04","Temel Radyo Haberleşme Eğitimi","Radio Communications Basics","Otüsem"],
+  ["2026-04-01","Proje Yönetimi","Project Management","BTK Akademi"],
+  ["2026-03-29","Nesnelerin İnterneti (IoT) ve Güvenliği","IoT and Device Security","BTK Akademi"],
+  ["2026-02-28","STM32 ile Gömülü Yazılım Geliştirme","Embedded Development with STM32","BTK Akademi",true],
+  ["2026-02-28","Versiyon Kontrolleri: Git ve GitHub","Version Control with Git and GitHub","BTK Akademi"],
+  ["2026-02-28","C Programlama Dili","C Programming","BTK Akademi"],
+  ["2024-12-01","ASP.NET MVC","ASP.NET MVC","BTK Akademi"],
+  ["2023-12-01","CSS","CSS","BTK Akademi"],
+  ["2023-10-01","HTML5 Web Geliştirme","Web Development with HTML5","BTK Akademi"]
+];
+const months={tr:["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"],en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]};
+const fmt=d=>{const [y,m]=d.split("-");return `${months[lang][+m-1]} ${y}`};
+const ALL="__all"; let active=ALL;
+const orgs=[ALL,...new Set(certs.map(c=>c[3]))];
+const t0=Date.parse("2023-07-01"), t1=Date.parse("2026-12-31");
+const pos=d=>((Date.parse(d)-t0)/(t1-t0)*100);
+
+function render(){
+  document.getElementById("skills").innerHTML=skills.map(([tr,en,l,y])=>
+    `<div class="skill"><span class="n">${lang==="tr"?tr:en}</span><span class="y">${typeof y==="string"?y:`${y} ${lang==="tr"?"yıl":(y>1?"years":"year")}`}</span>
+    <div class="meter">${[1,2,3].map(i=>`<i class="${i<=l?'on':''}"></i>`).join("")}<span>${lvlName[lang][l]}</span></div></div>`).join("");
+  document.getElementById("filters").innerHTML=orgs.map(o=>`<button type="button" id="f-${o.replace(/\W/g,'')}" aria-pressed="${o===active}" data-o="${o}">${o===ALL?(lang==="tr"?"Tümü":"All"):o}<span class="c">${o===ALL?certs.length:certs.filter(c=>c[3]===o).length}</span></button>`).join("");
+  document.getElementById("certs").innerHTML=certs.filter(c=>active===ALL||c[3]===active).map(c=>
+    `<li class="${c[4]?'hl':''}"><span class="d">${fmt(c[0])}</span><span class="t">${lang==="tr"?c[1]:c[2]}</span><span class="o">${c[3]}</span></li>`).join("");
+  // month grid: rows = years, columns = months
+  const vis=certs.filter(c=>active===ALL||c[3]===active);
+  let g=`<span></span>`+months[lang].map(m=>`<span class="mh">${m.slice(0,lang==="tr"?3:1)}</span>`).join("");
+  for(const y of [2023,2024,2025,2026]){
+    g+=`<span class="yl">${lang==="tr"?y:"'"+String(y).slice(2)}</span>`;
+    for(let m=1;m<=12;m++){
+      const k=`${y}-${String(m).padStart(2,"0")}`;
+      const items=vis.filter(c=>c[0].startsWith(k)), n=items.length;
+      const cls=n?(n>=4?"n3":n>=2?"n2":"n1"):"";
+      const off=month&&month!==k?"off":"";
+      if(n){
+        const names=items.map(c=>lang==="tr"?c[1]:c[2]).join(" · ");
+        g+=`<button type="button" class="cell ${cls} ${month===k?'sel':''} ${off}" data-m="${k}" title="${fmt(k+'-01')}: ${names}" aria-label="${fmt(k+'-01')}, ${n}">${n}</button>`;
+      } else g+=`<span class="cell ${off}" aria-hidden="true"></span>`;
+    }
+  }
+  document.getElementById("hm").innerHTML=g;
+  const tr=lang==="tr";
+  document.getElementById("tlnote").innerHTML=
+    `<span>${tr?"Her kutu bir ay · Kutuya tıklayınca o ayın eğitimleri listelenir":"Each square is a month · Select one to list that month's training"}</span>
+     <span class="key">${tr?"Az":"Fewer"} <i class="n1"></i><i class="n2"></i><i class="n3"></i> ${tr?"Çok":"More"}</span>`+
+    (month?`<button type="button" class="clear" id="clear-month">${fmt(month+'-01')} ✕</button>`:"");
+}
+let month=null;
+const _render=render;
+render=function(){
+  _render();
+  if(month){
+    const ul=document.getElementById("certs");
+    ul.innerHTML=certs.filter(c=>(active===ALL||c[3]===active)&&c[0].startsWith(month)).map(c=>
+      `<li class="${c[4]?'hl':''}"><span class="d">${fmt(c[0])}</span><span class="t">${lang==="tr"?c[1]:c[2]}</span><span class="o">${c[3]}</span></li>`).join("");
+  }
+};
+document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;active=b.dataset.o;month=null;render();});
+document.getElementById("hm").addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b)return;month=month===b.dataset.m?null:b.dataset.m;render();});
+document.getElementById("tlnote").addEventListener("click",e=>{if(e.target.closest("#clear-month")){month=null;render();}});
+
+document.getElementById("copy").addEventListener("click",async e=>{
+  const b=e.currentTarget, m=document.getElementById("mail"), old=b.innerHTML;
+  try{await navigator.clipboard.writeText(m.textContent);b.textContent=lang==="tr"?"Kopyalandı":"Copied";}
+  catch(_){const r=document.createRange();r.selectNodeContents(m);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Ctrl+C";}
+  setTimeout(()=>b.innerHTML=old,2000);
+});
+
+/* ---------- circuit-board background ---------- */
+const pcb=(function(){
+  const cv=document.getElementById("pcb"), ctx=cv.getContext("2d");
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let w,h,traces=[],pulses=[],seed=7;
+  const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+  const G=28;
+  function build(){
+    seed=7;traces=[];
+    const cols=Math.ceil(w/G)+2, rows=Math.ceil(h/G)+2, count=Math.round(cols*rows/(w<600?20:14));
+    const dirs=[[1,0],[0,1],[1,1],[1,-1]];
+    for(let n=0;n<count;n++){
+      let x=Math.floor(rnd()*cols)*G, y=Math.floor(rnd()*rows)*G;
+      let d=dirs[Math.floor(rnd()*4)];
+      const pts=[[x,y]], segs=2+Math.floor(rnd()*3);
+      for(let s=0;s<segs;s++){
+        const len=(2+Math.floor(rnd()*5))*G;
+        x+=d[0]*len; y+=d[1]*len; pts.push([x,y]);
+        const turn=rnd();
+        if(d[0]&&d[1]) d=turn<.5?[d[0],0]:[0,d[1]];
+        else if(d[0]) d=turn<.5?[d[0],1]:[d[0],-1];
+        else d=turn<.5?[1,d[1]]:[-1,d[1]];
+      }
+      let L=0; for(let i=1;i<pts.length;i++)L+=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);
+      traces.push({pts,L});
+    }
+    pulses=traces.filter((_,i)=>i%5===0).map(t=>({t,p:rnd(),v:.0009+rnd()*.0012}));
+  }
+  function at(tr,p){
+    let dist=p*tr.L;
+    for(let i=1;i<tr.pts.length;i++){
+      const a=tr.pts[i-1],b=tr.pts[i],l=Math.hypot(b[0]-a[0],b[1]-a[1]);
+      if(dist<=l){const k=dist/l;return [a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k];}
+      dist-=l;
+    }
+    return tr.pts[tr.pts.length-1];
+  }
+  function draw(){
+    const cs=getComputedStyle(root), tc=cs.getPropertyValue("--trace").trim(), pc=cs.getPropertyValue("--pad").trim(), ac=cs.getPropertyValue("--accent").trim(), bg=cs.getPropertyValue("--bg").trim();
+    ctx.clearRect(0,0,w,h);
+    ctx.lineWidth=1.4; ctx.strokeStyle=tc; ctx.lineJoin="round";
+    for(const t of traces){ctx.beginPath();t.pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();}
+    for(const t of traces){
+      for(const [x,y] of [t.pts[0],t.pts[t.pts.length-1]]){
+        ctx.beginPath();ctx.arc(x,y,3.4,0,7);ctx.fillStyle=bg;ctx.fill();ctx.strokeStyle=pc;ctx.lineWidth=1.4;ctx.stroke();
+      }
+    }
+    for(const q of pulses){
+      const [x,y]=at(q.t,q.p);
+      ctx.beginPath();ctx.arc(x,y,1.8,0,7);ctx.fillStyle=ac;ctx.globalAlpha=.55;ctx.fill();ctx.globalAlpha=1;
+    }
+  }
+  function size(){const dpr=devicePixelRatio||1;w=innerWidth;h=innerHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);build();draw();}
+  function loop(){for(const q of pulses){q.p+=q.v;if(q.p>1)q.p=0;}draw();requestAnimationFrame(loop);}
+  addEventListener("resize",size); size(); if(!still) requestAnimationFrame(loop);
+  return {redraw:draw};
+})();
+
+/* ---------- sensor lab ---------- */
+const lab=(function(){
+  const NS="http://www.w3.org/2000/svg";
+  const boards=[
+    {name:"ARDUINO",tr:"İlk adım. Sensörleri tek tek bağlayıp okumayı, her birinin nasıl davrandığını Arduino ile öğrendim.",en:"Where it started. Arduino is where I learned to wire up sensors one at a time and see how each one behaves.",n:3},
+    {name:"STM32",tr:"Bir seviye aşağı indim. STM32 ile donanımı gömülü C kullanarak doğrudan programlamaya başladım.",en:"One level closer to the metal. With STM32 I started programming the hardware directly in embedded C.",n:5},
+    {name:"ESP32",tr:"Wi-Fi ve Bluetooth'lu ESP32 ile birden fazla sensörü bir araya getirip küçük projeler geliştirdim.",en:"On the ESP32, with Wi-Fi and Bluetooth built in, I combined several sensors into small projects of my own.",n:8}
+  ];
+  const slots=[[40,30],[130,30],[290,30],[380,30],[40,226],[130,226],[290,226],[380,226]];
+  const order=[0,7,3,4,1,6,2,5];
+  const wires=document.getElementById("wires"), sens=document.getElementById("sensors"), pins=document.getElementById("mcu-pins");
+  for(let i=0;i<10;i++){const x=168+i*9.5;
+    for(const [y1,y2] of [[98,92],[158,164]]){const l=document.createElementNS(NS,"line");l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y1",y1);l.setAttribute("y2",y2);pins.appendChild(l);}}
+  const wEls=[], sEls=[];
+  slots.forEach(([x,y],i)=>{
+    const top=y<128, px=172+(i%4)*25, py=top?92:164;
+    const midY=top?62:194;
+    const w=document.createElementNS(NS,"path");
+    w.setAttribute("d",`M${px} ${py} V${midY} H${x} V${top?y+14:y-14}`);w.setAttribute("class","wire");wires.appendChild(w);wEls.push(w);
+    const g=document.createElementNS(NS,"g");g.setAttribute("class","sensor");
+    g.innerHTML=`<rect x="${x-20}" y="${y-14}" width="40" height="28" rx="2"/><circle cx="${x}" cy="${y}" r="5"/>`;
+    sens.appendChild(g);sEls.push(g);
+  });
+  let cur=0, timer=null;
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const out=document.getElementById("serial-out");
+  function lines(i){
+    const tr=lang==="tr", b=boards[i], L=[];
+    L.push(`<span class="hi">&gt; ${b.name.toLowerCase()}.init()</span>`);
+    if(i===0){for(let k=1;k<=3;k++)L.push(`  ${tr?"sensör testi":"sensor test"} #${k} ... <span class="ok">ok</span>`);}
+    if(i===1){L.push(`  ${tr?"gömülü C derleniyor":"building embedded C"} ... <span class="ok">ok</span>`);L.push(`  ${tr?"sensörler okunuyor":"reading sensors"} ... <span class="ok">ok</span>`);}
+    if(i===2){L.push(`  ${tr?"birden fazla sensör bağlı":"multiple sensors attached"}`);L.push(`<span class="hi">&gt; sensors.combine()</span>`);L.push(`  ${tr?"küçük projeler":"small projects"} ... <span class="ok">✓</span>`);}
+    return L;
+  }
+  function type(i){
+    clearTimeout(timer);
+    const L=lines(i);
+    if(still){out.innerHTML=L.join("\n")+'<span class="cur"></span>';return;}
+    let k=0; out.innerHTML="";
+    (function next(){
+      if(k>=L.length){out.innerHTML=L.join("\n")+'<span class="cur"></span>';return;}
+      out.innerHTML=L.slice(0,k+1).join("\n")+'<span class="cur"></span>'; k++;
+      timer=setTimeout(next,420);
+    })();
+  }
+  function select(i){
+    cur=i;
+    document.querySelectorAll(".step").forEach(b=>b.setAttribute("aria-selected",+b.dataset.i===i));
+    document.getElementById("mcu-name").textContent=boards[i].name;
+    const n=boards[i].n;
+    order.forEach((idx,k)=>{const on=k<n;wEls[idx].classList.toggle("live",on);sEls[idx].classList.toggle("live",on);});
+    document.getElementById("step-text").textContent=boards[i][lang];
+    type(i);
+  }
+  document.querySelector(".steps").addEventListener("click",e=>{const b=e.target.closest(".step");if(b)select(+b.dataset.i);});
+  return {refresh(){select(cur);}};
+})();
+const _render2=render; render=function(){_render2(); if(typeof lab!=="undefined") lab.refresh();};
+
+/* ---------- mobile menu ---------- */
+(function(){
+  const nav=document.querySelector("nav"), btn=document.getElementById("menu-btn");
+  btn.addEventListener("click",()=>{const o=nav.classList.toggle("open");btn.setAttribute("aria-expanded",o);});
+  document.getElementById("nav-links").addEventListener("click",e=>{if(e.target.closest("a")){nav.classList.remove("open");btn.setAttribute("aria-expanded","false");}});
+})();
+
+setLang(lang);
+route();
+</script>
+
+</body>
+</html>
